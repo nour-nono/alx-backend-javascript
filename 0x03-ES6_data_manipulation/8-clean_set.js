@@ -1,4 +1,4 @@
-export default function cleanSet(set, str) {
+export default function cleanSet(set, startString ) {
   // let res;
   // if (!startString || typeof startString !== 'string') {
   //   return '';
@@ -7,14 +7,14 @@ export default function cleanSet(set, str) {
   // res = res.map((word) => word.slice(startString.length));
   // return res.join('-');
   let ans = [];
-  if (!str || typeof str !== 'string') {
+  if (!startString  || typeof startString  !== 'string') {
     return "";
   }
   for (const s of set)
   {
-    if (typeof s === 'string' && s.startsWith(str))
+    if (typeof s === 'string' && s.startsWith(startString ))
     {
-      ans.push(s.substring(str.length));
+      ans.push(s.substring(startString .length));
     }
   }
   return ans.join('-');
