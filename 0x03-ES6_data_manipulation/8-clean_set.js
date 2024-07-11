@@ -8,13 +8,13 @@ export default function cleanSet(set, startString ) {
   // return res.join('-');
   let ans = [];
   if (!startString  || typeof startString  !== 'string') {
-    return "";
+    return '';
   }
   for (const s of set)
   {
-    if (typeof s === 'string' && s.startsWith(startString ))
+    if (typeof s === 'string' && s.startsWith(startString))
     {
-      ans.push(s.substring(startString .length));
+      ans.push(s.substring(startString.length));
     }
   }
   return ans.join('-');
