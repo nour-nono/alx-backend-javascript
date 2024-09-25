@@ -38,35 +38,67 @@
 //     });
 //   });
 // }
-const { readFile } = require('fs/promises');
 
-const countStudents = async (path) => {
-  let file;
-  try {
-    file = await readFile(path, 'utf8');
-  } catch (e) {
-    throw new Error('Cannot load the database');
-  }
-  const lines = file.trim().split('\n');
-  lines.shift();
-  let output = `Number of students: ${lines.length}\n`;
-  const answer = {};
-  lines.forEach((l) => {
-    const fields = l.trim().split(',');
-    if (answer[fields[3]]) {
-      if (fields.length == 4) {
-        answer[fields[3]].push(fields[0]);
+// const { readFile } = require('fs/promises');
+
+// const countStudents = async (path) => {
+//   let file;
+//   try {
+//     file = await readFile(path, 'utf8');
+//   } catch (e) {
+//     throw new Error('Cannot load the database');
+//   }
+//   const lines = file.trim().split('\n');
+//   lines.shift();
+//   let output = `Number of students: ${lines.length}\n`;
+//   const answer = {};
+//   lines.forEach((l) => {
+//     const fields = l.trim().split(',');
+//     if (answer[fields[3]]) {
+//       if (fields.length == 4) {
+//         answer[fields[3]].push(fields[0]);
+//       }
+//     } else {
+//       answer[fields[3]] = [fields[0]];
+//     }
+//   });
+//   Object.entries(answer).forEach(([k, v]) => {
+//     output += `Number of students in ${k}: ${v.length}. List: ${v.join(
+//       ', '
+//     )}\n`;
+//   });
+//   return output.trim();
+// };
+
+const { readFile } = require("fs");
+
+const countStudents = (path) =>
+  new Promise((resolve, reject) => {
+    readFile(path, "utf8", (err, data) => {
+      if (err) {
+        reject(Error("Cannot load the database"));
+        return;
       }
-    } else {
-      answer[fields[3]] = [fields[0]];
-    }
+      const lines = data.trim().split("\n");
+      lines.shift(); // Remove header
+      const answer = {};
+      lines.forEach((l) => {
+        const fields = l.trim().split(",");
+        if (answer[fields[3]]) {
+          answer[fields[3]].push(fields[0]);
+        } else {
+          answer[fields[3]] = [fields[0]];
+        }
+      });
+      let output = `Number of students: ${lines.length}\n`;
+      Object.entries(answer).forEach(([k, v]) => {
+        output += `Number of students in ${k}: ${v.length}. List: ${v.join(
+          ", "
+        )}\n`;
+      });
+      output = output.trim();
+      resolve(output);
+    });
   });
-  Object.entries(answer).forEach(([k, v]) => {
-    output += `Number of students in ${k}: ${v.length}. List: ${v.join(
-      ', '
-    )}\n`;
-  });
-  return output.trim();
-};
 
 module.exports = countStudents;
