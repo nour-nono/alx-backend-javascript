@@ -68,7 +68,7 @@
 //       resolve(data);
 //     });
 //   });
-const { readFile } = require("fs/promises");
+const { readFile } = require('fs/promises');
 
 const countStudents = async (path) => {
   let file;
