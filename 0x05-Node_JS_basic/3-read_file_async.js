@@ -95,10 +95,9 @@ const countStudents = (path) =>
       Object.entries(answer).forEach(([k, v]) => {
         output += `Number of students in ${k}: ${v.length}. List: ${v.join(
           ', '
-        )}\n`;
+        )}`;
       });
       resolve(output);
     });
   });
-
 module.exports = countStudents;
