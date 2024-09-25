@@ -78,11 +78,11 @@ const countStudents = (path) =>
         reject(Error('Cannot load the database'));
         return;
       }
-      const lines = data.split('\n');
-      lines.shift(); // Remove header
+      const lines = data.trim().split('\n');
+      lines.shift();
       const answer = {};
       lines.forEach((l) => {
-        const fields = l.trim().split(',');
+        const fields = l.split(',');
         if (answer[fields[3]]) {
           if (fields.length == 4) {
             answer[fields[3]].push(fields[0]);
@@ -97,7 +97,7 @@ const countStudents = (path) =>
           ', '
         )}\n`;
       });
-      output = output;
+      output = output.trim();
       resolve(output);
     });
   });
