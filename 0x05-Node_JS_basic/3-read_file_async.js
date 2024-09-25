@@ -46,11 +46,11 @@ const countStudents = (path) =>
         reject(Error('Cannot load the database'));
         return;
       }
-      const lines = data.toString().trim().split('\n');
+      const lines = data.trim().split('\n');
       lines.shift();
       const answer = {};
       lines.forEach((l) => {
-        const fields = l.toString().split(',');
+        const fields = l.split(',');
         if (answer[fields[3]]) {
           if (fields.length == 4) {
             answer[fields[3]].push(fields[0]);
@@ -59,13 +59,13 @@ const countStudents = (path) =>
           answer[fields[3]] = [fields[0]];
         }
       });
-      let output = `Number of students: ${lines.length}\n`;
+      console.log(`Number of students: ${lines.length}`);
       Object.entries(answer).forEach(([k, v]) => {
-        output += `Number of students in ${k}: ${v.length}. List: ${v.join(
+        console.log(`Number of students in ${k}: ${v.length}. List: ${v.join(
           ', '
-        )}`;
+        )}`);
       });
-      resolve(output);
+      resolve(data);
     });
   });
 
