@@ -97,7 +97,6 @@ const countStudents = (path) =>
           ', '
         )}\n`;
       });
-      output = output.trim();
       resolve(output);
     });
   });
