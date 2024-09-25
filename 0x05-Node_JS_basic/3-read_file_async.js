@@ -43,9 +43,9 @@ const { readFile } = require('fs/promises');
 const countStudents = async (path) => {
   let file;
   try {
-    file = await readFile(path, "utf8");
+    file = await readFile(path, 'utf8');
   } catch (e) {
-    throw new Error("Cannot load the database");
+    throw new Error('Cannot load the database');
   }
   const lines = file.trim().split('\n');
   lines.shift();
