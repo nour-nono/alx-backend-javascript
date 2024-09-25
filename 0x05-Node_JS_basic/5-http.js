@@ -45,26 +45,45 @@ function countStudents(fileName) {
   });
 }
 
+// const app = http.createServer((req, res) => {
+//   res.statusCode = 200;
+//   res.setHeader('Content-Type', 'text/plain');
+//   if (req.url === '/') {
+//     res.write('Hello Holberton School!');
+//     res.end();
+//   }
+//   if (req.url === '/students') {
+//     res.write('This is the list of our students\n');
+//     countStudents(process.argv[2].toString()).then((output) => {
+//       const outString = output.slice(0, -1);
+//       res.end(outString);
+//     }).catch(() => {
+//       res.statusCode = 404;
+//       res.end('Cannot load the database');
+//     });
+//   }
+// });
+
+// app.listen(port, hostname, () => {
+// });
 const app = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  if (req.url === '/') {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  if (req.url === '/') res.write('Hello Holberton School!');
+  else if (req.url === '/students') {
     res.write('Hello Holberton School!');
-    res.end();
+    countStudents(process.argv[2].toString())
+      .then((output) => {
+        const outString = output.trim();
+        res.write(outString);
+      })
+      .catch(() => {
+        res.statusCode = 404;
+        res.write('Cannot load the database');
+      });
   }
-  if (req.url === '/students') {
-    res.write('This is the list of our students\n');
-    countStudents(process.argv[2].toString()).then((output) => {
-      const outString = output.slice(0, -1);
-      res.end(outString);
-    }).catch(() => {
-      res.statusCode = 404;
-      res.end('Cannot load the database');
-    });
-  }
+  res.end();
 });
 
-app.listen(port, hostname, () => {
-});
+app.listen(1245);
 
 module.exports = app;
