@@ -68,12 +68,14 @@ function countStudents(fileName) {
 // });
 const app = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
-  if (req.url === '/') res.write('Hello Holberton School!');
+  if (req.url === '/') {
+    res.write('Hello Holberton School!');
+  }
   else if (req.url === '/students') {
     res.write('Hello Holberton School!');
     countStudents(process.argv[2].toString())
       .then((output) => {
-        const outString = output.trim();
+        const outString = output.slice(0, -1);
         res.write(outString);
       })
       .catch(() => {
