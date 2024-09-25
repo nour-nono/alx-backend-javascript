@@ -41,7 +41,9 @@ const countStudents = (path) => {
   lines.forEach((l) => {
     const fields = l.trim().split(",");
     if (answer[fields[3]]) {
-      answer[fields[3]].push(fields[0]);
+      if (fields.length == 4) {
+        answer[fields[3]].push(fields[0]);
+      }
     } else {
       answer[fields[3]] = [fields[0]];
     }
