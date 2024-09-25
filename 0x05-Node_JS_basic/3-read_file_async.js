@@ -92,9 +92,9 @@ const countStudents = async (path) => {
     }
   });
   Object.entries(answer).forEach(([k, v]) => {
-    console.log(`Number of students in ${k}: ${v.length}. List: ${v.join(
-      ', '
-    )}`);
+    console.log(
+      `Number of students in ${k}: ${v.length}. List: ${v.join(', ')}`
+    );
   });
   return Promise.resolve(file);
 };
