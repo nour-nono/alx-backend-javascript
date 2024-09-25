@@ -126,6 +126,7 @@ const app = http.createServer((req, res) => {
   res.end();
 });
 
-app.listen(1245);
+app.listen(port, hostname, () => {
+});
 
 module.exports = app;
