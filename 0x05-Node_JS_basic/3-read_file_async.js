@@ -51,7 +51,7 @@ const countStudents = async (path) => {
   const answer = {};
   lines.forEach((l) => {
     const fields = l.trim().split(',');
-    if (fields.length == 4 && answer[fields[3]]) {
+    if (answer[fields[3]]) {
       if (fields.length == 4) {
         answer[fields[3]].push(fields[0]);
       }
