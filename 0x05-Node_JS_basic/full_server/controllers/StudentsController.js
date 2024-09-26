@@ -50,23 +50,23 @@ class StudentsController {
   static async getAllStudents(req, res) {
     res.statusCode = 200;
     const filepath = process.argv.length > 2 ? process.argv[2] : '';
-    const output = await readDatabase(filepath);
-    output.then((data) => {
-      res.write(`This is the list of our students\n${data}`);
-      const fields = Object.keys(data);
-      fields.sort();
-      fields
-        .forEach((field) => {
-          res.send(
-            `Number of students in ${field}: ${
-              data[field].length
-            }. List: ${data[field].join(', ')}\n`
-          );
-        })
-        .catch((error) => {
-          statusCode = 500;
-          res.send(error.message);
-        });
+    let data = '';
+    try {
+      data = await readDatabase(filepath);
+    } catch (err) {
+      res.statusCode = 500;
+      res.send(err.message);
+      return;
+    }
+    res.write(`This is the list of our students\n${data}`);
+    const fields = Object.keys(data);
+    fields.sort();
+    fields.forEach((field) => {
+      res.send(
+        `Number of students in ${field}: ${data[field].length}. List: ${data[
+          field
+        ].join(', ')}\n`
+      );
     });
   }
   static async getAllStudentsByMajor(req, res) {
@@ -78,16 +78,16 @@ class StudentsController {
       res.send('Major parameter must be CS or SWE');
       return;
     }
-    const output = await readDatabase(filepath);
-    output
-      .then((data) => {
-        const students = data[major.toUpperCase()];
-        res.write(`List: ${students.join(', ')}`);
-      })
-      .catch((error) => {
-        res.statusCode = 500;
-        res.send(error.message);
-      });
+    let data = '';
+    try {
+      data = await readDatabase(filepath);
+    } catch (err) {
+      res.statusCode = 500;
+      res.send(err.message);
+      return;
+    }
+    const students = data[major.toUpperCase()];
+    res.write(`List: ${students.join(', ')}`);
   }
 }
 
