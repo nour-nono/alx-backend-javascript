@@ -2,7 +2,7 @@
  * start express application server
  */
 import express from 'express';
-import router from './routes/index.js';
+import router from './routes/index';
 const port = 1245;
 const app = express();
 app.use('/', router);
