@@ -88,7 +88,7 @@ class StudentsController {
       return;
     }
     const students = data[major.toUpperCase()];
-    res.write(`List: ${students.join(', ')}`);
+    res.send(`List: ${students.join(', ')}`);
   }
 }
 
