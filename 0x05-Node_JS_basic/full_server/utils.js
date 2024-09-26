@@ -37,7 +37,7 @@ function readDatabase(path) {
       lines.shift();
       lines.forEach((line) => {
         const [fname, , , field] = line.trim().split(',');
-        if (name && field) {
+        if (fname && field) {
           answer[field] ? answer[field].push(fname) : (answer[field] = [fname]);
         }
       });
