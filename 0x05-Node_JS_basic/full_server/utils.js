@@ -29,9 +29,7 @@ import fs from 'fs';
 function readDatabase(path) {
   return new Promise((resolve, reject) => {
     fs.readFile(path, 'utf8', (err, data) => {
-      if (err) {
-        reject('Cannot load the database');
-      }
+      if (err) reject(new Error('Cannot load the database'));
       const answer = {};
       const lines = data.trim().split('\n');
       lines.shift();
