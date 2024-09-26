@@ -58,15 +58,16 @@ class StudentsController {
       res.send(err.message);
       return;
     }
-    res.write(`This is the list of our students\n${data}`);
+    res.write(`This is the list of our students\n`);
     const fields = Object.keys(data);
     fields.sort();
     fields.forEach((field) => {
-      res.send(
+      res.write(
         `Number of students in ${field}: ${data[field].length}. List: ${data[
           field
         ].join(', ')}\n`
       );
+      res.end();
     });
   }
   static async getAllStudentsByMajor(req, res) {
