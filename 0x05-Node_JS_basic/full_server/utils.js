@@ -1,7 +1,7 @@
 /**
  * Reads file asynchronously and prepares a report with the data from a csv file
  */
-// import fs from 'fs';
+import fs from 'fs';
 
 // function readDatabase(path) {
 //   return new Promise((resolve, reject) => {
@@ -26,10 +26,9 @@
 //     });
 //   });
 // }
-const { readFile } = require('node:fs');
 function readDatabase(path) {
   return new Promise((resolve, reject) => {
-    readFile(path, 'utf8', (err, data) => {
+    fs.readFile(path, 'utf8', (err, data) => {
       if (err) {
         reject('Cannot load the database');
       }
